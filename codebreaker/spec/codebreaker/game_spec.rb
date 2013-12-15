@@ -7,6 +7,7 @@ module Codebreaker
 
     describe '#start' do
       it "sends a welcome message" do
+        # expect(output.puts).to be == "Welcome to Codebreaker!"
         output.should_receive(:puts).with('Welcome to Codebreaker!')
         game.start('1234')
       end

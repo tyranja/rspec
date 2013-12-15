@@ -7,6 +7,8 @@ module Codebreaker
     def start(secret)
       @secret = secret
       @output.puts 'Welcome to Codebreaker!'
+      @output.puts 'There a 4 numbers from 1 to 6.'
+      @output.puts 'You have to guess the existence and the exact match.'
       @output.puts 'Enter guess:'
     end
 
