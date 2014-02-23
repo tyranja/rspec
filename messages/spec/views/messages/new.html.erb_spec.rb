@@ -30,4 +30,15 @@ describe "messages/new.html.erb" do
         )
      end
   end
+
+  it "renders a text area" do
+    message.stub(text: "the message")
+    render
+    rendered.should have_selector("form") do |form|
+      form.should have_selector("textarea",
+        name: "message[text]",
+        content: "the message"
+                               )
+    end
+  end
 end
