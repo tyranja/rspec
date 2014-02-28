@@ -3,7 +3,7 @@ require 'stringio'
 
 module Codebreaker
   describe Game do
-    let(:output)  {StringIO.new}
+    let(:output)  { double('output').as_null_object }
     let(:game)    { Game.new(output) }
 
     describe '#start' do
@@ -30,6 +30,39 @@ module Codebreaker
           expect(output.read).to eq("")
         end
       end
+
+      context "with one number match" do
+        it "sends a mark with '-'" do
+          game.start('1234')
+          output.should_receive(:puts).with('-')
+          game.guess('2555')
+        end
+      end
+
+      context "with 1 exact match" do
+        it "sends a mark with '+'" do
+          game.start('1234')
+          output.should_receive(:puts).with('+')
+          game.guess('1555')
+        end
+      end
+
+      context "with 2 numbers matches" do
+        it "sends a mark with '--'" do
+          game.start('1234')
+          output.should_receive(:puts).with('--')
+          game.guess('2355')
+        end
+      end
+
+      context "with 1 number match and 1 exact match (in that order" do
+        it "sends a mark with '+-'" do
+          game.start('1234')
+          output.should_receive(:puts).with('+-')
+          game.guess('2535')
+        end
+      end
+
     end
   end
 end
